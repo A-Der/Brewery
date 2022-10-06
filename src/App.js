@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import { QueryClient, QueryClientProvider } from "react-query";
+import BreweryMap from "./breweryMap/breweryMap";
 import "./App.css";
 
 const queryClient = new QueryClient();
@@ -7,7 +8,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -20,8 +21,10 @@ function App() {
         >
           Learn React
         </a>
-      </header>
-      <QueryClientProvider client={queryClient}></QueryClientProvider>
+      </header> */}
+      <QueryClientProvider client={queryClient}>
+        <BreweryMap />
+      </QueryClientProvider>
     </div>
   );
 }
