@@ -1,5 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import { QueryClient, QueryClientProvider } from "react-query";
+import "./App.css";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -18,6 +21,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <QueryClientProvider client={queryClient}></QueryClientProvider>
     </div>
   );
 }
