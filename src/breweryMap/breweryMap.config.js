@@ -1,5 +1,5 @@
 export const mapInfoMaker = (name, city, state, url, phone) => (
-  <>
+  <div>
     <p>{name}</p>
     <p>
       {city}, {state}
@@ -12,5 +12,5 @@ export const mapInfoMaker = (name, city, state, url, phone) => (
         </a>
       </p>
     </p>
-  </>
+  </div>
 );

@@ -8,5 +8,9 @@
     outline: none;
     border-color: #66d2b3;
     box-shadow: 0 0 10px #66d2b3;
+
+    .button-wrapper{
+      display: flex;
+    }
   }
 }
