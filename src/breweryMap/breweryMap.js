@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import { Map, Marker, ZoomControl } from "pigeon-maps";
+import "./breweryMap.scss";
+import { mapInfoMaker } from "./breweryMap.config";
 
 const fetchBreweries = async () => {
   const res = await fetch("https://api.openbrewerydb.org/breweries");
@@ -16,15 +18,19 @@ const BreweryMap = () => {
     isLoading,
     isError,
   } = useQuery("breweries", fetchBreweries);
-  const [defaultMapCenter, setDefaultMapCenter] = useState([
-    34.802528, -8.567037,
-  ]);
   const [mapCenter, setMapCenter] = useState([]);
   const [zoom, setZoom] = useState(4);
+  const [selectedBrewery, setSelectedBrewery] = useState("No 🍻 selected :(");
+
+  const defaultMapCenter = [34.802528, -8.567037];
+  const markerColor = "#23B757";
+
+  data.forEach((d) => console.log(d));
 
   return (
     <div className="container">
-      <div className="notification is-primary">
+      <div className="section">
+        <div className="box">{selectedBrewery}</div>
         <Map
           height={400}
           defaultCenter={defaultMapCenter}
@@ -33,21 +39,38 @@ const BreweryMap = () => {
           zoom={zoom}
         >
           <ZoomControl />
-          {data.map(
-            ({ latitude, longitude }, index) =>
+          {data.map((d, index) => {
+            const {
+              latitude,
+              longitude,
+              name,
+              city,
+              state,
+              website_url: url,
+              brewery_type: type,
+              phone,
+            } = d;
+
+            //refactor
+            return (
               latitude &&
               longitude && (
                 <Marker
                   key={index}
                   width={50}
+                  color={markerColor}
                   anchor={[parseFloat(latitude), parseFloat(longitude)]}
                   onClick={() => {
                     setMapCenter([latitude, longitude]);
                     setZoom(8);
+                    setSelectedBrewery(
+                      mapInfoMaker(name, city, state, url, phone)
+                    );
                   }}
                 />
               )
-          )}
+            );
+          })}
         </Map>
       </div>
     </div>
