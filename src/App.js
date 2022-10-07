@@ -8,20 +8,14 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
+      <section class="hero is-primary">
+        <div class="hero-body">
+          <p class="title">
+            My Local Brewery <span className="beer-emoji">🍻</span>
+          </p>
+          <p class="subtitle">Find a Brewery Near You</p>
+        </div>
+      </section>
       <QueryClientProvider client={queryClient}>
         <BreweryMap />
       </QueryClientProvider>
