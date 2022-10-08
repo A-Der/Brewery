@@ -14,3 +14,7 @@ export const mapInfoMaker = (name, city, state, url, phone) => (
     </p>
   </div>
 );
+
+export const defaultInfo = "No 🍻 selected 🥺";
+export const defaultMapCenter = [34.802528, -8.567037];
+export const markerColor = "#23B757";

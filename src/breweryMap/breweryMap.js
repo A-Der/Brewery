@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { Map, Marker, ZoomControl } from "pigeon-maps";
 import "./breweryMap.scss";
-import { mapInfoMaker } from "./breweryMap.config";
+import {
+  defaultInfo,
+  defaultMapCenter,
+  mapInfoMaker,
+  markerColor,
+} from "./breweryMap.config";
 
 const fetchBreweries = async () => {
   const res = await fetch("https://api.openbrewerydb.org/breweries");
   return res.json();
 };
-// onclick marker set centered state
-// open modal of info
-// search certain areas
-// filter
-const defaultInfo = "No 🍻 selected 🥺";
+
 const BreweryMap = () => {
   const {
     data = [],
@@ -27,10 +28,6 @@ const BreweryMap = () => {
     setZoom(4);
     setSelectedBrewery(defaultInfo);
   };
-  const defaultMapCenter = [34.802528, -8.567037];
-  const markerColor = "#23B757";
-
-  data.forEach((d) => console.log(d));
 
   return (
     <div className="container">
@@ -57,7 +54,6 @@ const BreweryMap = () => {
               city,
               state,
               website_url: url,
-              brewery_type: type,
               phone,
             } = d;
 
