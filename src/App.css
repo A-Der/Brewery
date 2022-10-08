@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+
+.beer-emoji {
+  font-size: 50px;
+}

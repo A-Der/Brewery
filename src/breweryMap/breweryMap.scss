@@ -1,0 +1,16 @@
+.container {
+  margin-top: 1rem;
+
+  .section {
+    padding: 1rem;
+    border: 2px solid #dadada;
+    border-radius: 7px;
+    outline: none;
+    border-color: #66d2b3;
+    box-shadow: 0 0 10px #66d2b3;
+
+    .button-wrapper{
+      display: flex;
+    }
+  }
+}

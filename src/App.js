@@ -1,5 +1,5 @@
-import logo from "./logo.svg";
 import { QueryClient, QueryClientProvider } from "react-query";
+import BreweryMap from "./breweryMap/breweryMap";
 import "./App.css";
 
 const queryClient = new QueryClient();
@@ -7,21 +7,17 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <QueryClientProvider client={queryClient}></QueryClientProvider>
+      <section className="hero is-primary">
+        <div className="hero-body">
+          <p className="title is-justify-content-center is-align-content-center">
+            My Local Brewery <span className="beer-emoji">🍻</span>
+          </p>
+          <p className="subtitle">Find a Brewery Near You</p>
+        </div>
+      </section>
+      <QueryClientProvider client={queryClient}>
+        <BreweryMap />
+      </QueryClientProvider>
     </div>
   );
 }
