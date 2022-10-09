@@ -18,47 +18,44 @@ export const mapInfoMaker = (name, city, state, url, phone) => (
 export const defaultInfo = "No 🍻 selected 🥺";
 export const defaultMapCenter = [34.802528, -8.567037];
 export const markerColor = "#23B757";
+export const defaultZoom = 2.5;
 
-const select = () => (
-  <div class="select">
-    <select>
-      <option>Select dropdown</option>
-      <option>With options</option>
-    </select>
-  </div>
-);
+export const resetMap = (setZoom, setSelectedBrewery, setMapCenter) => {
+  setZoom(defaultZoom);
+  setSelectedBrewery(defaultInfo);
+  setMapCenter(defaultMapCenter);
+};
 
-export const filterLevel = (
-  uniqueTypes,
-  uniqueStates,
-  setTypeFilterValue,
-  setStateFilterValue
-) => (
+const capitalizeFirstLetter = (string) =>
+  string.charAt(0).toUpperCase() + string.slice(1);
+
+const handleTypeFilterChange = (filterValue, value, setBreweryData, data) => {
+  const filteredData = value
+    ? data.filter((d) => d[filterValue] === value)
+    : data;
+  setBreweryData(filteredData);
+};
+
+export const filterLevel = (uniqueTypes, setBreweryData, data) => (
   <nav className="level">
     <div className="level-item has-text-centered">
       <div>
         <h5>Brewery Type</h5>
         <div className="select">
-          <select onChange={(e) => setTypeFilterValue(e.target.value)}>
-            <option>Select a brewery type...</option>
+          <select
+            onChange={(e) =>
+              handleTypeFilterChange(
+                "brewery_type",
+                e.target.value,
+                setBreweryData,
+                data
+              )
+            }
+          >
+            <option>All brewery types</option>
             {uniqueTypes.map((type) => (
               <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-    </div>
-    <div className="level-item has-text-centered">
-      <div>
-        <h5>State</h5>
-        <div className="select">
-          <select onChange={(e) => setStateFilterValue(e.target.value)}>
-            <option>Select a state...</option>
-            {uniqueStates.map((type) => (
-              <option key={type} value={type}>
-                {type}
+                {capitalizeFirstLetter(type)}
               </option>
             ))}
           </select>

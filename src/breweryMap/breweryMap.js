@@ -5,11 +5,12 @@ import "./breweryMap.scss";
 import {
   defaultInfo,
   defaultMapCenter,
+  defaultZoom,
   filterLevel,
-  getFilterValues,
   getUniqueValues,
   mapInfoMaker,
   markerColor,
+  resetMap,
 } from "./breweryMap.config";
 
 const fetchBreweries = async () => {
@@ -26,29 +27,19 @@ const BreweryMap = () => {
   const [mapCenter, setMapCenter] = useState([]);
   const [zoom, setZoom] = useState(4);
   const [selectedBrewery, setSelectedBrewery] = useState(defaultInfo);
-  const [typeFilterValue, setTypeFilterValue] = useState(null);
-  const [stateFilterValue, setStateFilterValue] = useState(null);
-
-  const resetMap = () => {
-    setZoom(4);
-    setSelectedBrewery(defaultInfo);
-  };
-
+  const [breweryData, setBreweryData] = useState([]);
   const uniqueTypes = getUniqueValues(data, "brewery_type");
-  const uniqueStates = getUniqueValues(data, "state");
-  console.log(typeFilterValue);
+
   return (
     <div className="container">
       <div className="section">
-        {filterLevel(
-          uniqueTypes,
-          uniqueStates,
-          setTypeFilterValue,
-          setStateFilterValue
-        )}
+        {filterLevel(uniqueTypes, setBreweryData, data)}
         <div className="box">{selectedBrewery}</div>
         <div className="button-wrapper">
-          <button className="button is-danger" onClick={resetMap}>
+          <button
+            className="button is-danger"
+            onClick={() => resetMap(setZoom, setSelectedBrewery, setMapCenter)}
+          >
             Reset Map
           </button>
         </div>
@@ -56,11 +47,11 @@ const BreweryMap = () => {
           height={400}
           defaultCenter={defaultMapCenter}
           center={mapCenter}
-          defaultZoom={2.5}
+          defaultZoom={defaultZoom}
           zoom={zoom}
         >
           <ZoomControl />
-          {data.map((d, index) => {
+          {(breweryData.length > 0 ? breweryData : data).map((d, index) => {
             const {
               latitude,
               longitude,
