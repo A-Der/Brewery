@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .beer-emoji {
+      font-size: 50px;
+    }
+  }
+  .subtitle {
+    font-weight: 500;
+  }
+}

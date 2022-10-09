@@ -5,6 +5,9 @@ import "./breweryMap.scss";
 import {
   defaultInfo,
   defaultMapCenter,
+  filterLevel,
+  getFilterValues,
+  getUniqueValues,
   mapInfoMaker,
   markerColor,
 } from "./breweryMap.config";
@@ -23,15 +26,26 @@ const BreweryMap = () => {
   const [mapCenter, setMapCenter] = useState([]);
   const [zoom, setZoom] = useState(4);
   const [selectedBrewery, setSelectedBrewery] = useState(defaultInfo);
+  const [typeFilterValue, setTypeFilterValue] = useState(null);
+  const [stateFilterValue, setStateFilterValue] = useState(null);
 
   const resetMap = () => {
     setZoom(4);
     setSelectedBrewery(defaultInfo);
   };
 
+  const uniqueTypes = getUniqueValues(data, "brewery_type");
+  const uniqueStates = getUniqueValues(data, "state");
+  console.log(typeFilterValue);
   return (
     <div className="container">
       <div className="section">
+        {filterLevel(
+          uniqueTypes,
+          uniqueStates,
+          setTypeFilterValue,
+          setStateFilterValue
+        )}
         <div className="box">{selectedBrewery}</div>
         <div className="button-wrapper">
           <button className="button is-danger" onClick={resetMap}>

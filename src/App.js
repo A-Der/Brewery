@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import BreweryMap from "./breweryMap/breweryMap";
-import "./App.css";
+import "./App.scss";
 
 const queryClient = new QueryClient();
 
@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <section className="hero is-primary">
         <div className="hero-body">
-          <p className="title is-justify-content-center is-align-content-center">
+          <p className="title">
             My Local Brewery <span className="beer-emoji">🍻</span>
           </p>
           <p className="subtitle">Find a Brewery Near You</p>
