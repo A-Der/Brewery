@@ -12,6 +12,7 @@ import {
   markerColor,
   resetMap,
 } from "./breweryMap.config";
+import { isErrorMessage, loadingSpinner } from "./common/utils";
 
 const fetchBreweries = async () => {
   const res = await fetch("https://api.openbrewerydb.org/breweries");
@@ -30,7 +31,7 @@ const BreweryMap = () => {
   const [breweryData, setBreweryData] = useState([]);
   const uniqueTypes = getUniqueValues(data, "brewery_type");
 
-  return (
+  const renderPage = (
     <div className="container">
       <div className="section">
         {filterLevel(uniqueTypes, setBreweryData, data)}
@@ -81,6 +82,16 @@ const BreweryMap = () => {
         </Map>
       </div>
     </div>
+  );
+
+  return (
+    <>
+      {isLoading && !isError
+        ? loadingSpinner()
+        : isError
+        ? isErrorMessage()
+        : renderPage}
+    </>
   );
 };
 
